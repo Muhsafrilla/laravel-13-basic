@@ -61,7 +61,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-               return view('student.edit',[
+            return view('student.edit',[
             'title' => 'Edit Student',
             'student'=> $student,
             ]);
@@ -72,7 +72,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-                 $validated = $request->validate([
+        $validated = $request->validate([
         'name' => 'required|max:255',
         'nim' => 'required|digits:11|numeric',
     ], [
