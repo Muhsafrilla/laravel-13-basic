@@ -15,6 +15,9 @@ Route::put('/student/{student}', [StudentController::class, 'update'])->name('st
 Route::delete('/student/{student}', [StudentController::class, 'destroy'])->name('student.destroy');
 
 Route::resource('department', DepartmentController::class);
+Route::get('/department/create', [DepartmentController::class, 'create'])->name('department.create');
+Route::post('/department/store', [DepartmentController::class, 'store'])->name('department.store');
 Route::get('/department/{department}/edit', [DepartmentController::class, 'edit'])->name('department.edit');
 Route::put('/department/{department}', [DepartmentController::class, 'update'])->name('department.update');
+Route::delete('/department/{department}', [DepartmentController::class, 'destroy'])->name('department.destroy');
 Route::resource('lecturer', LecturerController::class);

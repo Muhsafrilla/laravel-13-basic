@@ -14,7 +14,7 @@ class StudentController extends Controller
     {
         return view('student.index',[
             'title' => 'Student',
-            'student'=> Student::latest()->get(),
+            'student'=> Student::latest('')->get(),
             //'student'=> Student::orderBy('name', 'asc')->get(),
             ]);
     }
@@ -32,7 +32,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-         $validated = $request->validate([
+        $validated = $request->validate([
         'name' => 'required|max:255',
         'nim' => 'required|digits:11|numeric',
     ], [
@@ -42,7 +42,6 @@ class StudentController extends Controller
         'nim.digits' => 'Nim wajib :digits digit',
         'nim.numeric' => 'Nim wajib angka',
     ]);
- 
         Student::create($validated);
 
                 return to_route('student.index')->withSuccess('Data berhasil ditambahkan');
@@ -93,7 +92,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-           $student->delete($student);
+        $student->delete($student);
 
         return to_route('student.index')->withSuccess('Data berhasil dihapus');
     }

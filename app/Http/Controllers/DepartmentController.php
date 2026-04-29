@@ -23,7 +23,7 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        return view('department.create',['title' => 'Create Department']);
     }
 
     /**
@@ -31,7 +31,16 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+        'name' => 'required|max:255',
+        'nim' => 'required|digits:11|numeric',
+    ], [
+        'name.required' => 'Name tidak boleh kosong',
+        'name.max' => 'Name tidak boleh lebih dari :max karakter',
+    ]);
+ 
+        Department::create($validated);
+            return to_route('department.store')->withSuccess('Data berhasil ditambahkan');
     }
 
     /**
@@ -58,13 +67,12 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, Department $department)
     {
-          $validated = $request->validate([
+        $validated = $request->validate([
         'name' => 'required|max:255',
     ], [
         'name.required' => 'Name tidak boleh kosong',
         'name.max' => 'Name tidak boleh lebih dari :max karakter',
     ]);
- 
         $department->update($validated);
 
         return to_route('department.index')->withSuccess('Data berhasil diubah');
@@ -75,6 +83,8 @@ class DepartmentController extends Controller
      */
     public function destroy(Department $department)
     {
-        //
+        $department->delete($department);
+
+        return to_route('department.index')->withSuccess('Data berhasil dihapus');
     }
 }
