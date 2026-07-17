@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LecturerController;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,4 @@ Route::get('/department/{department}/edit', [DepartmentController::class, 'edit'
 Route::put('/department/{department}', [DepartmentController::class, 'update'])->name('department.update');
 Route::delete('/department/{department}', [DepartmentController::class, 'destroy'])->name('department.destroy');
 Route::resource('lecturer', LecturerController::class);
+Route::resource('organization', OrganizationController::class);
